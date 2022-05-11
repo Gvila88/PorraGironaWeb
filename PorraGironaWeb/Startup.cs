@@ -33,7 +33,8 @@ namespace PorraGironaWeb
             //del fitxer appsettings.json
             ConnectionStrings = Configuration["ConnectionStrings:PorraGironawebContextConnection"];
 
-
+            services.AddControllersWithViews();
+            services.AddMvc(); //Afegit per funcionalitat Identitat
         }
         public static string ConnectionStrings { get; private set; } = "server=localhost;database=porragirona;uid=root";
 
@@ -51,6 +52,8 @@ namespace PorraGironaWeb
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthorization();
+            app.UseSession();
 
             app.UseAuthorization();
 
@@ -58,7 +61,11 @@ namespace PorraGironaWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Puntuacions}/{action=Index}/{id?}");
+                    //pattern: "{controller=Home}/{action=Index}/{id?}");
+                    //pattern: "{controller-Puntuacions}/{action=Index}/{id?}");
+                     pattern: "{controller=Puntuacions}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages(); //Afegir per funcionalitat Identitat
             });
         }
     }
