@@ -1,10 +1,17 @@
-﻿@model IEnumerable<PorraGironaWeb.Models.Entity.Porre>
+﻿@using Microsoft.AspNetCore.Http
+@model IEnumerable<PorraGironaWeb.Models.Entity.Porre>
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Porres"] = "Porres";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{String rol = "";
+    byte[] rolsessioa = null;
+    bool existeixa = HttpContextAccessor.HttpContext.Session.TryGetValue("rol", out rolsessioa);
+    if (existeixa) rol = System.Text.Encoding.UTF8.GetString(rolsessioa);
+}
 <h1>Porres</h1>
 
 <p>
@@ -23,53 +30,108 @@
                 @*@Html.DisplayNameFor(model => model.Data)*@Data
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.Idsgolejadorslocal)Id Golejador Local
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Idsgolejadorsvisitant)
-            </th>*@
+            @Html.DisplayNameFor(model => model.Idsgolejadorslocal)Id Golejador Local
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Idsgolejadorsvisitant)
+        </th>*@
             <th>
                 @*@Html.DisplayNameFor(model => model.IdpartitNavigation)*@Id Partit
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.IdpenyistaNavigation)*@Id Penyista
             </th>
-            <th>
-                Opcions
-            </th>
+            @if (rol.Equals("admin"))
+            {
+                <th>
+                    Opcions
+                </th>
+            }
+
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
 
-                @Html.DisplayFor(modelItem => item.Golslocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Golsvisitant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Idsgolejadorslocal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Idsgolejadorsvisitant)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.IdpartitNavigation.Idpartit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdpenyistaNavigation.Idpenyista)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Idporra">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Idporra">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Idporra">Delete</a>
-            </td>
-        </tr>
-}
+        @if (rol.Equals("admin"))
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Golslocal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Golsvisitant)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Idsgolejadorslocal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Idsgolejadorsvisitant)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdpartitNavigation.Idpartit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdpenyistaNavigation.Idpenyista)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Idporra">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Idporra">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Idporra">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            int idpenyista = 0;
+            byte[] idsessio = null;
+            bool booleano = HttpContextAccessor.HttpContext.Session.TryGetValue("idpenyista", out idsessio);
+            if (booleano) idpenyista = Convert.ToInt32(System.Text.Encoding.UTF8.GetString(idsessio));
+
+            @foreach (var item in Model)
+            {
+                if (item.Idpenyista == idpenyista)
+                {
+                    <tr>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.Golslocal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Golsvisitant)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Idsgolejadorslocal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Idsgolejadorsvisitant)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdpartitNavigation.Idpartit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdpenyistaNavigation.Idpenyista)
+                        </td>
+                        @*<td>
+                                <a asp-action="Edit" asp-route-id="@item.Idporra">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Idporra">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Idporra">Delete</a>
+                            </td>*@
+                    </tr>
+                }
+            }
+
+        }
+
     </tbody>
 </table>

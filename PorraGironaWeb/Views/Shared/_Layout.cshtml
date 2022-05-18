@@ -269,7 +269,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacitat</a>
                         </li>
-                        if (rol.Equals("admin"))
+                        if (rol.Equals("admin")|| rol.Equals("soci"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Porres" asp-action="Index">Porres</a>
