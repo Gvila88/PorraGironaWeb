@@ -216,6 +216,7 @@
                     <a class="navbar-brand" asp-controller="Login" asp-action="Index"> <font class="text-danger"> <b>Porra Girona</b></font></a>
 
                 }
+                
 
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -252,25 +253,32 @@
 
 
                     <!-- Barra de menú -->
-                    <ul class="navbar-nav flex-grow-1">
-                        @{
-                            String rol = "";
-                            byte[] rolsessio = null;
-                            bool existeix = HttpContextAccessor.HttpContext.Session.TryGetValue("rol", out rolsessio);
-                            if (existeix) rol = System.Text.Encoding.UTF8.GetString(rolsessio);
-                            //Si és un usuari identificat amb sessió mostra els menús
-                            if ((rol.Equals("soci")) || (rol.Equals("admin")))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Puntuacions" asp-action="Index">Puntuacions</a>
-                                </li>
-                            }
+                <ul class="navbar-nav flex-grow-1">
+                    @{
+                        String rol = "";
+                        byte[] rolsessio = null;
+                        bool existeix = HttpContextAccessor.HttpContext.Session.TryGetValue("rol", out rolsessio);
+                        if (existeix) rol = System.Text.Encoding.UTF8.GetString(rolsessio);
+                        //Si és un usuari identificat amb sessió mostra els menús
+                        if ((rol.Equals("soci")) || (rol.Equals("admin")))
+                        {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacitat</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Puntuacions" asp-action="Index">Puntuacions</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"> Privacitat</a>
+                        </li>
+                        if (rol.Equals("admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Porres" asp-action="Index">Porres</a>
                             </li>
                         }
 
-                    </ul>
+                    }
+
+                </ul>
                 </div>
             </div>
         </nav>

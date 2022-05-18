@@ -1,0 +1,61 @@
+﻿@model PorraGironaWeb.Models.Entity.Porre
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Porre</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Golslocal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Golslocal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Golsvisitant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Golsvisitant)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Idsgolejadorslocal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Idsgolejadorslocal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Idsgolejadorsvisitant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Idsgolejadorsvisitant)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdpartitNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdpartitNavigation.Idpartit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdpenyistaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdpenyistaNavigation.Idpenyista)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Idporra">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

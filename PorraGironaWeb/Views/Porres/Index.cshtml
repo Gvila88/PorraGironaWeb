@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PorraGironaWeb.Models.Entity.Porre>
+
+@{
+    ViewData["Porres"] = "Porres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Porres</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Golslocal)*@Gols Local
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Golsvisitant)*@Gols Visitant
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Data)*@Data
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.Idsgolejadorslocal)Id Golejador Local
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idsgolejadorsvisitant)
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.IdpartitNavigation)*@Id Partit
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.IdpenyistaNavigation)*@Id Penyista
+            </th>
+            <th>
+                Opcions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Golslocal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Golsvisitant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Idsgolejadorslocal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idsgolejadorsvisitant)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.IdpartitNavigation.Idpartit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdpenyistaNavigation.Idpenyista)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Idporra">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Idporra">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Idporra">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
