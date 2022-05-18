@@ -9,6 +9,7 @@ namespace PorraGironaWeb.Models.Entity
     {
         public int Idpuntuacio { get; set; }
         public int Idpenyista { get; set; }
+        public string Alias { get; set; }
         public int? Puntuacio { get; set; }
         public string Temporada { get; set; }
     }

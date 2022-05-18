@@ -63,7 +63,7 @@ namespace PorraGironaWeb
                     name: "default",
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                     //pattern: "{controller-Puntuacions}/{action=Index}/{id?}");
-                     pattern: "{controller=Puntuacions}/{action=Index}/{id?}");
+                     pattern: "{controller=Login}/{action=Index}/{id?}");
 
                 endpoints.MapRazorPages(); //Afegir per funcionalitat Identitat
             });
